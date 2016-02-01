@@ -1,0 +1,7 @@
+ <xs:element name="PHSFCOI" type="xs:string" nillable="true" minOccurs="0"/>
+                            <xs:element name="RANDD" type="xs:string" nillable="true" minOccurs="0"/>
+                            <xs:element name="FFATA" type="xs:string" nillable="true" minOccurs="0"/>
+                            <xs:element name="ModificationType" type="xs:string" nillable="true" minOccurs="0"/>
+                            <xs:element name="COSTSHARE" type="xs:string" nillable="true" minOccurs="0"/>
+                            
+                            <-- line 32 to 36 changes -->
