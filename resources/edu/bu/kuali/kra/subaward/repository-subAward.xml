@@ -1,0 +1,149 @@
+<!--
+ Copyright 2005-2014 The Kuali Foundation.
+ 
+ Licensed under the Educational Community License, Version 1.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+ 
+ http://www.opensource.org/licenses/ecl1.php
+ 
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+-->
+<descriptor-repository version="1.0">
+
+	
+	<class-descriptor class="org.kuali.kra.subaward.bo.SubAward" table="SUBAWARD">
+		<field-descriptor name="subAwardId" column="SUBAWARD_ID" jdbc-type="BIGINT" primarykey="true"  autoincrement="true" sequence-name="SUBAWARD_ID_S" />
+		<field-descriptor name="documentNumber" column="DOCUMENT_NUMBER" jdbc-type="VARCHAR" access="anonymous" />		
+		<field-descriptor name="sequenceNumber" column="SEQUENCE_NUMBER" jdbc-type="INTEGER"/>	
+		<field-descriptor name="subAwardCode" column="SUBAWARD_CODE" jdbc-type="VARCHAR" />
+		<field-descriptor name="organizationId" column="ORGANIZATION_ID" jdbc-type="VARCHAR" />
+		<field-descriptor name="startDate" column="START_DATE" jdbc-type="DATE" />
+		<field-descriptor name="endDate" column="END_DATE" jdbc-type="DATE" />
+		<field-descriptor name="subAwardTypeCode" column="SUBAWARD_TYPE_CODE" jdbc-type="INTEGER" />
+		<field-descriptor name="purchaseOrderNum" column="PURCHASE_ORDER_NUM" jdbc-type="VARCHAR" />
+		<field-descriptor name="title" column="TITLE" jdbc-type="VARCHAR" />
+		<field-descriptor name="statusCode" column="STATUS_CODE" jdbc-type="INTEGER" />
+		<field-descriptor name="accountNumber" column="ACCOUNT_NUMBER" jdbc-type="VARCHAR" />
+		<field-descriptor name="vendorNumber" column="VENDOR_NUMBER" jdbc-type="VARCHAR" />
+		<field-descriptor name="requisitionerId" column="REQUISITIONER_ID" jdbc-type="VARCHAR" />
+		<field-descriptor name="requisitionerUnit" column="REQUISITIONER_UNIT" jdbc-type="VARCHAR" />
+		<field-descriptor name="archiveLocation" column="ARCHIVE_LOCATION" jdbc-type="VARCHAR" />
+		<field-descriptor name="closeoutDate" column="CLOSEOUT_DATE" jdbc-type="DATE" />		
+		<field-descriptor name="comments" column="COMMENTS" jdbc-type="VARCHAR" />
+		<field-descriptor name="updateTimestamp" column="UPDATE_TIMESTAMP" jdbc-type="TIMESTAMP" />
+		<field-descriptor name="updateUser" column="UPDATE_USER" jdbc-type="VARCHAR" />
+		<field-descriptor name="siteInvestigator" column="SITE_INVESTIGATOR" jdbc-type="INTEGER" />
+		<field-descriptor name="costType" column="COST_TYPE" jdbc-type="INTEGER" />
+		<field-descriptor name="executionDate" column="DATE_OF_FULLY_EXECUTED" jdbc-type="DATE" />
+		<field-descriptor name="requisitionId" column="REQUISITION_NUMBER" jdbc-type="VARCHAR" />
+		<field-descriptor name="versionNumber" column="VER_NBR" jdbc-type="BIGINT" locking="true" />
+		<field-descriptor name="objectId" column="OBJ_ID" jdbc-type="VARCHAR" />
+		
+        <reference-descriptor name="subAwardDocument" class-ref="org.kuali.kra.subaward.document.SubAwardDocument" auto-retrieve="true" auto-update="none" auto-delete="none">
+            <foreignkey field-ref="documentNumber" />
+        </reference-descriptor>
+        <reference-descriptor name="organization" class-ref="org.kuali.kra.bo.Organization" auto-retrieve="true" auto-update="none" auto-delete="none"> 
+            <foreignkey field-ref="organizationId"/> 
+        </reference-descriptor>
+        <reference-descriptor name="unit" class-ref="org.kuali.kra.bo.Unit" auto-retrieve="true" auto-update="none" auto-delete="none"> 
+            <foreignkey field-ref="requisitionerUnit"/> 
+        </reference-descriptor>
+        <reference-descriptor name="rolodex" class-ref="org.kuali.kra.bo.Rolodex" auto-retrieve="true" auto-update="none" auto-delete="none"> 
+            <foreignkey field-ref="siteInvestigator"/>
+        </reference-descriptor>
+        <reference-descriptor name="subAwardStatus" class-ref="org.kuali.kra.subaward.bo.SubAwardStatus" auto-retrieve="true" auto-update="none" auto-delete="none"> 
+            <foreignkey field-ref="statusCode"/> 
+        </reference-descriptor>
+        <reference-descriptor name="subAwardType" class-ref="org.kuali.kra.award.home.AwardType" auto-retrieve="true" auto-update="none" auto-delete="none"> 
+            <foreignkey field-ref="subAwardTypeCode"/> 
+        </reference-descriptor>
+         <reference-descriptor name="subAwardCostType" class-ref="org.kuali.kra.subaward.bo.SubAwardCostType" auto-retrieve="true" auto-update="none" auto-delete="none"> 
+            <foreignkey field-ref="costType"/> 
+        </reference-descriptor>
+        
+ 	    <collection-descriptor name="subAwardFundingSourceList" proxy="true" element-class-ref="org.kuali.kra.subaward.bo.SubAwardFundingSource" collection-class="org.apache.ojb.broker.util.collections.ManageableArrayList" auto-retrieve="true" auto-update="object" auto-delete="object">
+			<inverse-foreignkey field-ref="subAwardId"/>
+		</collection-descriptor>
+		<collection-descriptor name="subAwardAmountInfoList" proxy="true" element-class-ref="org.kuali.kra.subaward.bo.SubAwardAmountInfo" collection-class="org.apache.ojb.broker.util.collections.ManageableArrayList" auto-retrieve="true" auto-update="object" auto-delete="object">
+			<inverse-foreignkey field-ref="subAwardId"/>
+		</collection-descriptor> 
+		<collection-descriptor name="subAwardContactsList" proxy="true" element-class-ref="org.kuali.kra.subaward.bo.SubAwardContact" collection-class="org.apache.ojb.broker.util.collections.ManageableArrayList" auto-retrieve="true" auto-update="object" auto-delete="object">
+			<inverse-foreignkey field-ref="subAwardId"/>
+		</collection-descriptor>
+	    <collection-descriptor name="subAwardCloseoutList" proxy="true" element-class-ref="org.kuali.kra.subaward.bo.SubAwardCloseout" collection-class="org.apache.ojb.broker.util.collections.ManageableArrayList" auto-retrieve="true" auto-update="object" auto-delete="object">
+			<inverse-foreignkey field-ref="subAwardId"/>
+		</collection-descriptor>
+		<collection-descriptor name="subAwardCustomDataList" proxy="true" element-class-ref="org.kuali.kra.subaward.customdata.SubAwardCustomData" collection-class="org.apache.ojb.broker.util.collections.ManageableArrayList" auto-retrieve="true" auto-update="object" auto-delete="object">
+			<inverse-foreignkey field-ref="subAwardId"/>
+		</collection-descriptor>
+		<collection-descriptor name="subAwardAttachments" proxy="true" element-class-ref="org.kuali.kra.subaward.bo.SubAwardAttachments" collection-class="org.apache.ojb.broker.util.collections.ManageableArrayList" auto-retrieve="true" auto-update="object" auto-delete="none">
+			<inverse-foreignkey field-ref="subAwardId"/>
+			<orderby name="attachmentId" sort="ASC" />
+		</collection-descriptor>
+		<collection-descriptor name="subAwardReportList" proxy="true" element-class-ref="org.kuali.kra.subaward.bo.SubAwardReports" collection-class="org.apache.ojb.broker.util.collections.ManageableArrayList" auto-retrieve="true" auto-update="object" auto-delete="none">
+			<inverse-foreignkey field-ref="subAwardId"/>
+			<orderby name="subAwardReportId" sort="ASC" />
+		</collection-descriptor>
+		<collection-descriptor name="subAwardTemplateInfo" proxy="true" element-class-ref="org.kuali.kra.subaward.bo.SubAwardTemplateInfo" collection-class="org.apache.ojb.broker.util.collections.ManageableArrayList" auto-retrieve="true" auto-update="object" auto-delete="none">
+			<inverse-foreignkey field-ref="subAwardId"/>
+		</collection-descriptor>
+		<reference-descriptor name="extension"
+                              class-ref="edu.bu.kuali.kra.subaward.bo.SubAwardExtension"
+                              auto-delete="object" auto-retrieve="true" auto-update="object" proxy="false">
+            <foreignkey field-ref="subAwardId"/>
+        </reference-descriptor>
+	</class-descriptor>
+
+	<class-descriptor class="edu.bu.kuali.kra.subaward.bo.SubAwardExtension"
+                      table="SUBAWARD_EXTENSION">
+		<field-descriptor name="subAwardId" column="SUBAWARD_ID" jdbc-type="BIGINT" primarykey="true"/>
+		<field-descriptor name="dateReceived" column="DATE_RECEIVED"
+                          jdbc-type="DATE"/>
+	</class-descriptor>       
+	
+	 <class-descriptor class="org.kuali.kra.subaward.bo.SubAwardAmountInfo" table="SUBAWARD_AMOUNT_INFO">
+        <field-descriptor name="subAwardAmountInfoId" column="SUBAWARD_AMOUNT_INFO_ID" jdbc-type="INTEGER" primarykey="true" autoincrement="true" sequence-name="SUBAWARD_AMT_INFO_ID_S"/>
+        <field-descriptor name="subAwardId" column="SUBAWARD_ID" jdbc-type="BIGINT" />
+        <field-descriptor name="sequenceNumber" column="SEQUENCE_NUMBER" jdbc-type="INTEGER"/>
+        <field-descriptor name="subAwardCode" column="SUBAWARD_CODE" jdbc-type="VARCHAR" />
+        <field-descriptor name="obligatedAmount" column="OBLIGATED_AMOUNT" jdbc-type="DECIMAL" conversion="org.kuali.rice.core.framework.persistence.ojb.conversion.OjbKualiDecimalFieldConversion" />
+        <field-descriptor name="obligatedChange" column="OBLIGATED_CHANGE" jdbc-type="DECIMAL" conversion="org.kuali.rice.core.framework.persistence.ojb.conversion.OjbKualiDecimalFieldConversion" />
+        <field-descriptor name="anticipatedAmount" column="ANTICIPATED_AMOUNT" jdbc-type="DECIMAL" conversion="org.kuali.rice.core.framework.persistence.ojb.conversion.OjbKualiDecimalFieldConversion" />
+        <field-descriptor name="anticipatedChange" column="ANTICIPATED_CHANGE" jdbc-type="DECIMAL" conversion="org.kuali.rice.core.framework.persistence.ojb.conversion.OjbKualiDecimalFieldConversion" />
+        <field-descriptor name="effectiveDate" column="EFFECTIVE_DATE" jdbc-type="DATE" />
+        <field-descriptor name="comments" column="COMMENTS" jdbc-type="VARCHAR" />
+        <field-descriptor name="updateTimestamp" column="UPDATE_TIMESTAMP" jdbc-type="TIMESTAMP" />
+        <field-descriptor name="updateUser" column="UPDATE_USER" jdbc-type="VARCHAR" />
+        <field-descriptor name="fileName" column="FILE_NAME" jdbc-type="VARCHAR" />
+        <field-descriptor name="document" column="DOCUMENT" jdbc-type="BINARY" />
+        <field-descriptor name="mimeType" column="MIME_TYPE" jdbc-type="VARCHAR" />
+        <field-descriptor name="fileId" column="FILE_ID" jdbc-type="BIGINT"/>
+        <field-descriptor name="modificationEffectiveDate" column="MODIFICATION_EFFECTIVE_DATE" jdbc-type="DATE" />
+        <field-descriptor name="modificationID" column="MODIFICATION_NUMBER" jdbc-type="VARCHAR" />
+        <field-descriptor name="periodofPerformanceStartDate" column="PERFORMANCE_START_DATE" jdbc-type="DATE" />
+        <field-descriptor name="periodofPerformanceEndDate" column="PERFORMANCE_END_DATE" jdbc-type="DATE" />
+        <field-descriptor name="versionNumber" column="VER_NBR" jdbc-type="BIGINT" locking="true" />
+        <field-descriptor name="objectId" column="OBJ_ID" jdbc-type="VARCHAR" />
+        
+        <reference-descriptor name="file" proxy="true" class-ref="org.kuali.kra.bo.AttachmentFile" auto-retrieve="true" auto-update="object" auto-delete="true"> 
+            <foreignkey field-ref="fileId"/>
+        </reference-descriptor>
+        <reference-descriptor name="extension"
+                              class-ref="edu.bu.kuali.kra.subaward.bo.SubAwardAmountInfoExtension"
+                              auto-retrieve="true" auto-update="object" auto-delete="object" proxy="false">
+            <foreignkey field-ref="subAwardAmountInfoId"/>
+            </reference-descriptor>
+    </class-descriptor>
+    
+     <class-descriptor class="edu.bu.kuali.kra.subaward.bo.SubAwardAmountInfoExtension" table="SUBAWARD_AMOUNT_INFO_EXTENSION">
+        <field-descriptor name="subAwardAmountInfoId" column="SUBAWARD_AMOUNT_INFO_ID" jdbc-type="INTEGER" primarykey="true"/>
+       
+       <field-descriptor name="modificationType" column="MODIFICATION_TYPE" jdbc-type="VARCHAR" />
+	</class-descriptor>
+
+</descriptor-repository>

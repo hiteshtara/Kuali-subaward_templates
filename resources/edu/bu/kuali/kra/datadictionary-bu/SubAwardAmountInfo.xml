@@ -1,0 +1,68 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+    <bean id="SubAwardAmountInfo" parent="SubAwardAmountInfo-parentBean" >
+       <property name="attributes" >
+        <list merge="true">
+        <ref bean="SubAwardAmountInfo-extension-modificationType" />
+       </list>
+       </property>
+    </bean>
+
+    <bean id="SubAwardAmountInfo-effectiveDate" parent="SubAwardAmountInfo-effectiveDate-parentBean">
+        <property name="label" value="FFATA Reporting Date"/>
+        <property name="shortLabel" value="FFATA Reporting Date"/>
+        <property name="required" value="false"/>
+        <property name="summary" value="FFATA Reporting Date"/>
+        <property name="description" value="FFATA Reporting Date"/>
+    </bean>
+
+    <bean id="SubAwardAmountInfo-modificationEffectiveDate" parent="SubAwardAmountInfo-modificationEffectiveDate-parentBean">
+        <property name="label" value="Effective Date of Amendment"/>
+        <property name="shortLabel" value="Effective Date of Amendment"/>
+        <property name="summary" value="Effective Date of Amendment"/>
+        <property name="description" value="Effective Date of Amendment"/>
+    </bean>
+
+    <bean id="SubAwardAmountInfo-periodofPerformanceStartDate" parent="SubAwardAmountInfo-periodofPerformanceStartDate-parentBean">
+        <property name="label" value="Budget Start Date"/>
+        <property name="shortLabel" value="Budget Start Date"/>
+        <property name="summary" value="Budget Start Date"/>
+        <property name="description" value="Budget Start Date"/>
+        <property name="required" value="true" />
+    </bean>
+
+    <!--
+	<bean id="SubAwardAmountInfo-modificationID" parent="SubAwardAmountInfo-modificationID-parentBean" >
+		<property name="validationPattern">
+			<bean parent="RegexValidationPattern"
+				p:pattern="^[0-9]{3}$|null"
+				p:validationErrorMessageKey="error.modification.number.invalid"/>
+		</property>
+	</bean>
+    -->
+
+    <bean id="SubAwardAmountInfo-periodofPerformanceEndDate" parent="SubAwardAmountInfo-periodofPerformanceEndDate-parentBean">
+        <property name="label" value="Budget End Date"/>
+        <property name="shortLabel" value="Budget End Date"/>
+        <property name="summary" value="Budget End Date"/>
+        <property name="description" value="Budget End Date"/>
+        <property name="required" value="true" />
+    </bean>
+
+    <bean id="SubAwardAmountInfo-extension-modificationType" parent="SubAwardAmountInfoExtension-modificationType">
+        <property name="name" value="extension.modificationType"/>
+        <property name="required" value="true" />
+    </bean>
+
+    <bean id="SubAwardAmountInfo-comments" parent="SubAwardAmountInfo-comments-parentBean" >
+    	<property name="validationPattern" >
+      	<bean parent="AnyCharacterValidationPattern"
+            p:allowWhitespace="true" />
+    	</property>
+ 	</bean>
+
+</beans>

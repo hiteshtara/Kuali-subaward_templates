@@ -1,0 +1,109 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+	<bean id="SubAward" parent="SubAward-parentBean">
+		<property name="attributes">
+			<list merge="true">
+				<ref bean="SubAward-extension-dateReceived" />
+			</list>
+		</property>
+		<property name="relationships">
+			<list>
+				<bean parent="RelationshipDefinition">
+					<property name="objectAttributeName" value="extension" />
+					<property name="primitiveAttributes">
+						<list>
+							<bean parent="PrimitiveAttributeDefinition" p:sourceName="subAwardId"
+								p:targetName="subAwardId" />
+						</list>
+					</property>
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<!-- Attribute Definitions -->
+
+	<bean id="SubAward-startDate" parent="SubAward-startDate-parentBean">
+		<property name="label" value="Project Start Date" />
+		<property name="shortLabel" value="Project Start Date" />
+		<property name="summary" value="Project Start Date" />
+		<property name="description" value="Project Start Date" />
+	</bean>
+
+	<bean id="SubAward-endDate" parent="SubAward-endDate-parentBean">
+		<property name="label" value="Project End Date" />
+		<property name="shortLabel" value="Project End Date" />
+		<property name="summary" value="Project End Date" />
+		<property name="description" value="Project End Date" />
+	</bean>
+
+	<bean id="SubAward-purchaseOrderId" parent="SubAward-purchaseOrderId-parentBean">
+		<property name="label" value="FRN" />
+		<property name="shortLabel" value="FRN" />
+		<property name="validationPattern">
+			<bean parent="NumericValidationPattern" />
+		</property>
+		<property name="maxLength" value="10" />
+		<property name="minLength" value="10" />
+		<property name="summary" value="FRN" />
+		<property name="description" value="FRN" />
+	</bean>
+
+	<bean id="SubAward-requisitionerUnit" parent="SubAward-requisitionerUnit-parentBean">
+		<property name="required" value="true" />
+		<property name="control">
+			<bean parent="SelectControlDefinition"
+				p:valuesFinderClass="edu.bu.kuali.kra.lookup.keyvalue.SubAwardRequisitionerUnitValuesFinder"
+				p:includeKeyInLabel="false" />
+		</property>
+	</bean>
+
+	<bean id="SubAward-organizationName" parent="SubAward-organizationName-parentBean" >
+		<property name="maxLength" value="200" />
+	</bean>
+
+	<bean id="SubAward-extension-dateReceived" parent="SubAwardExtension-dateReceived">
+		<property name="name" value="extension.dateReceived" />
+	</bean>
+
+	<bean id="SubAward-modificationEffectiveDate" parent="SubAward-modificationEffectiveDate-parentBean">
+		<property name="label" value="Effective Date of Amendment" />
+		<property name="shortLabel" value="Effective Date of Amendment" />
+		<property name="summary" value="Effective Date of Amendment" />
+		<property name="description" value="Effective Date of Amendment" />
+	</bean>
+
+	<bean id="SubAward-modificationId" parent="SubAward-modificationId-parentBean">
+		<property name="label" value="Amendment No." />
+		<property name="shortLabel" value="Amendment No." />
+		<property name="summary" value="Amendment No." />
+		<property name="description" value="Amendment No." />
+		<property name="validationPattern">
+			<bean parent="AnyCharacterValidationPattern" p:allowWhitespace="true" />
+		</property>
+	</bean>
+
+	<bean id="SubAward-performanceStartDate" parent="SubAward-performanceStartDate-parentBean">
+		<property name="label" value="Budget Start Date" />
+		<property name="shortLabel" value="Budget Start Date" />
+		<property name="summary" value="Budget Start Date" />
+		<property name="description" value="Budget Start Date" />
+	</bean>
+
+	<bean id="SubAward-performanceEnddate" parent="SubAward-performanceEnddate-parentBean">
+		<property name="label" value="Budget End Date" />
+		<property name="shortLabel" value="Budget End Date" />
+		<property name="summary" value="Budget End Date" />
+		<property name="description" value="Budget End Date" />
+	</bean>
+
+	<bean id="SubAward-comments" parent="SubAward-comments-parentBean">
+		<property name="validationPattern">
+			<bean parent="AnyCharacterValidationPattern" p:allowWhitespace="true" />
+		</property>
+	</bean>
+
+</beans>
