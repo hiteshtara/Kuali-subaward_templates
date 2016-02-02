@@ -1,0 +1,5 @@
+<dependency>
+    <groupId>edu.bu.kuali.kra.print.xsds</groupId>
+    <artifactId>bu-subaward-print</artifactId>
+    <version>1.0</version>
+</dependency>
